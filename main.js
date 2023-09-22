@@ -20,6 +20,13 @@ fetch(resultURL)
 			let date = data.snippet.publishedAt.split('T')[0];
 			date = date.split('-').join(' ');
 
+			let text = 'beef-lettuce-tomato';
+			text = text
+				.split('-')
+				.map((el) => el.charAt(0).toUpperCase() + el.slice(1))
+				.join(' ');
+			console.log(text);
+
 			tag += `
         <article>
           <h2>${
