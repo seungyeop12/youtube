@@ -14,7 +14,8 @@ fetch(resultURL)
 
 		json.items.map((data) => {
 			let desc = data.snippet.description;
-			desc.length > 120 ? (desc = desc.substr(0, 120) + '...') : desc;
+			desc.length > desc_len ? (desc = desc.substr(0, desc_len) + '...') : desc;
+
 			tag += `
         <article>
           <h2>${
