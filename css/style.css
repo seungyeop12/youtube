@@ -26,7 +26,7 @@ section article {
   padding: 2rem 0px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 section article h2 {
   width: 28%;
@@ -34,23 +34,88 @@ section article h2 {
   color: #555;
 }
 section article .txt {
-  width: 30%;
+  width: 38%;
   display: flex;
   flex-wrap: wrap;
-  align-content: space-around;
+  align-content: space-between;
 }
 section article .txt p {
   font: 1rem/1.2 "arial";
   color: #777;
 }
-section article .txt .pic {
+section article .pic {
   width: 30%;
-  height: 15rem;
+  height: 12rem;
 }
-section article .txt img {
+section article .pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+aside {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 5vw;
+  top: 0;
+  left: 0;
+}
+aside .con {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #555;
+}
+aside .con iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+aside .close {
+  font: bold 14px/1 "arial";
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+@media screen and (max-width: 999px) {
+  section {
+    width: 80vw;
+    margin: 7vh auto;
+  }
+  section article {
+    padding: 1.5rem 0px;
+  }
+  section article h2 {
+    width: 48%;
+    font: 100 40px/1 "work sans", "맑은 고딕";
+  }
+  section article .txt {
+    width: 48%;
+  }
+  section article .pic {
+    width: 100%;
+    height: 10rem;
+    margin-top: 2rem;
+  }
+}
+@media screen and (max-width: 539px) {
+  section {
+    width: 90vw;
+    margin: 5vh auto;
+  }
+  section article h2 {
+    width: 100%;
+    font: 100 40px/1 "work sans", "맑은 고딕";
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  section article .txt {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,49 +1,66 @@
 const frame = document.querySelector('section');
-const api_key = 'AIzaSyA4iVjYFWaYcsCq0z7a2Ey2FO9MTtXA6QI';
+const api_key = 'AIzaSyDqvoC8xc_hHGMQLtNaUT7GBsbUTB_uHyo';
 const baseURL = 'https://www.googleapis.com/youtube/v3/playlistItems';
-const pid = 'PLMMMmfSQpakSd6WsuPqYUflXHqd1YJliN';
+const pid = 'PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu';
 const num = 5;
 const resultURL = `${baseURL}?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
-const tit_ren = 50;
+const tit_len = 30;
 const desc_len = 180;
 
+window.addEventListener('click', (e) => {
+	if (e.target.nodeName === 'IMG') createPop(e.target.getAttribute('data-vid'));
+	if (e.target.className === 'close') removePop();
+});
 fetch(resultURL)
 	.then((data) => data.json())
 	.then((json) => {
 		console.log(json.items);
-		let tag = '';
+		let tags = '';
 
 		json.items.map((data) => {
 			let desc = data.snippet.description;
 			desc.length > desc_len ? (desc = desc.substr(0, desc_len) + '...') : desc;
 
+			//날자값 가공
 			let date = data.snippet.publishedAt.split('T')[0];
-			date = date.split('-').join(' ');
+			date = date.split('-').join('.');
 
-			let text = 'beef-lettuce-tomato';
-			text = text
-				.split('-')
-				.map((el) => el.charAt(0).toUpperCase() + el.slice(1))
-				.join(' ');
-			console.log(text);
-
-			tag += `
-        <article>
-          <h2>${
-						data.snippet.title.length > tit_ren
-							? data.snippet.title.substr(0, tit_ren) + '...'
+			tags += `
+				<article>
+					<h2>${
+						data.snippet.title.length > tit_len
+							? data.snippet.title.substr(0, tit_len) + '...'
 							: data.snippet.title
 					}</h2>
-          <div class='txt'>
-            <p>${desc}</p>
-            <span>${date}</span>
-          </div>
-          <div class='pic'>
-            <img src='${data.snippet.thumbnails.standard.url}'/>
-          </div>
-        </article>
-      `;
+					<div class='txt'>
+						<p>${desc}</p>
+						<span>${date}</span>
+					</div>
+					<div class='pic'>
+						<img src='${data.snippet.thumbnails.standard.url}' data-vid=${data.snippet.resourceId.videoId} />
+					</div>					
+				</article>
+			`;
 		});
 
-		frame.innerHTML = tag;
+		frame.innerHTML = tags;
 	});
+
+function createPop(id) {
+	console.log(id);
+	const aside = document.createElement('aside');
+	aside.innerHTML = `
+		<div class='con'>
+		<iframe src='https://www.youtube.com/embed/${id}'></iframe>
+		</div>		
+		<span class='close'>close</span>
+	`;
+	document.body.append(aside);
+	document.body.style.overflow = 'hidden';
+}
+
+function removePop() {
+	const pop = document.querySelector('aside');
+	pop.remove();
+	document.body.style.overflow = 'auto';
+}
