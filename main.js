@@ -5,6 +5,7 @@ const pid = 'PLMMMmfSQpakSd6WsuPqYUflXHqd1YJliN';
 const num = 5;
 const resultURL = `${baseURL}?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 const tit_ren = 50;
+const desc_len = 180;
 
 fetch(resultURL)
 	.then((data) => data.json())
