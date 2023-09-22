@@ -17,6 +17,9 @@ fetch(resultURL)
 			let desc = data.snippet.description;
 			desc.length > desc_len ? (desc = desc.substr(0, desc_len) + '...') : desc;
 
+			let date = data.snippet.publishedAt.split('T')[0];
+			date = date.split('-').join(' ');
+
 			tag += `
         <article>
           <h2>${
@@ -25,8 +28,8 @@ fetch(resultURL)
 							: data.snippet.title
 					}</h2>
           <div class='txt'>
-            <p>${data.snippet.description}</p>
-            <span>${data.snippet.publishedAt}</span>
+            <p>${desc}</p>
+            <span>${date}</span>
           </div>
           <div class='pic'>
             <img src='${data.snippet.thumbnails.standard.url}'/>
